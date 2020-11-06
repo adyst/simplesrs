@@ -22,6 +22,9 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json']
+  },
   devServer: {
     contentBase: path.join(__dirname, '/dist'),
     index: 'index.html',

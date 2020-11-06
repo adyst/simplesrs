@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import {makeStyles, AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Collapse} from '@material-ui/core';
+import {makeStyles, AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemProps, ListItemIcon, ListItemText, Divider, Collapse} from '@material-ui/core';
 import { AccountCircle, ExpandMore, ExpandLess } from '@material-ui/icons';
 import InboxIcon from '@material-ui/icons/Inbox';
 import HorizontalSplitIcon from '@material-ui/icons/HorizontalSplit';
@@ -8,6 +8,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import HomePage from './HomePage';
 import DeckPage from './DeckPage';
 import SettingsPage from './SettingsPage';
+import { userData } from '../lib/services/data';
+import { Deck } from '../lib/interfaces/app.interface';
 
 const drawerWidth = 240;
 
@@ -33,7 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ListItemLink = (props) => {
+interface ListItemLinkProps extends ListItemProps {
+  to: string
+}
+
+const ListItemLink: React.FunctionComponent<ListItemLinkProps> = (props: { to: string }) => {
   return <ListItem button component={Link} {...props}/>
 };
 
@@ -76,31 +82,12 @@ export default function App() {
         <Divider/>
 
         <List>
-          <ListItemLink to="/123" onClick={handleClick}>
-            <ListItemIcon><HorizontalSplitIcon/></ListItemIcon>
-            <ListItemText primary="Language Deck"/>
-            {open ? <ExpandLess/> : <ExpandMore/>}
-          </ListItemLink>
-          <Collapse in={open}>
-            <List>
-              <ListItemLink to="/123789" className={classes.nested}>
-                <ListItemIcon><HorizontalSplitIcon/></ListItemIcon>
-                <ListItemText primary="Vocabulary"/>
-              </ListItemLink>
-              <ListItemLink to="/12345" className={classes.nested}>
-                <ListItemIcon><HorizontalSplitIcon/></ListItemIcon>
-                <ListItemText primary="Phrases"/>
-              </ListItemLink>
-            </List>
-          </Collapse>
-          <ListItemLink to="/456">
-            <ListItemIcon><HorizontalSplitIcon/></ListItemIcon>
-            <ListItemText primary="Study Deck"/>
-          </ListItemLink>
-          <ListItemLink to="/789">
-            <ListItemIcon><HorizontalSplitIcon/></ListItemIcon>
-            <ListItemText primary="Random Deck"/>
-          </ListItemLink>
+          {userData.decks.map(deck => 
+            <ListItemLink key={deck.id} to={`/${deck.id}`}>
+              <ListItemIcon><HorizontalSplitIcon/></ListItemIcon>
+              <ListItemText primary={deck.name}/>
+            </ListItemLink>
+          )}
         </List>
 
         <Divider/>

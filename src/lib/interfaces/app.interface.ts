@@ -1,12 +1,13 @@
 export interface User {
   id: number;
-  decks: Deck[]
+  name: string;
+  deckIds: number[]
 }
 
 export interface Deck {
   id: number;
   name: string;
-  ownerId?: number;
+  ownerId: number;
   viewerIds?: number[];
   childDecks?: Deck[];
   cards: Card[];
@@ -14,8 +15,7 @@ export interface Deck {
 
 export interface Card {
   id: number;
-  front: string;
-  back: string;
+  content: string;
   lastReviewDate?: Date;
   nextReviewDate?: Date;
 }

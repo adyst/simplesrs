@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import {makeStyles, AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemProps, ListItemIcon, ListItemText, Divider, Collapse} from '@material-ui/core';
+import {makeStyles, AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemProps, ListItemIcon, ListItemText, Divider, Collapse, Container} from '@material-ui/core';
 import { AccountCircle, ExpandMore, ExpandLess } from '@material-ui/icons';
 import InboxIcon from '@material-ui/icons/Inbox';
 import HorizontalSplitIcon from '@material-ui/icons/HorizontalSplit';
@@ -8,20 +8,17 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import HomePage from './HomePage';
 import DeckPage from './DeckPage';
 import SettingsPage from './SettingsPage';
-import { userData } from '../lib/services/data';
+import UserService from '../lib/services/user.service'
 import { Deck } from '../lib/interfaces/app.interface';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex'
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  title: {
-    flexGrow: 1
+    display: 'flex', 
+    '& main': {
+      width: '100%'
+    }
   },
   drawer: {
     width: drawerWidth,
@@ -33,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
   nested: {
     paddingLeft: theme.spacing(4),
   },
+  container: {
+  }
 }));
 
 interface ListItemLinkProps extends ListItemProps {
@@ -53,26 +52,17 @@ export default function App() {
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar}>
-        <Toolbar variant="dense">
-          <Typography variant="h6" className={classes.title}>
-            Simple SRS
-          </Typography>
-          <IconButton>
-            <AccountCircle/>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
       <Drawer 
         variant="permanent" 
         className={classes.drawer}
         classes={{
           paper: classes.drawerPaper,
         }}>
-        <Toolbar/>
 
         <List>
+          <ListItem>
+            <Typography variant="h6">Simple SRS</Typography>
+          </ListItem>
           <ListItemLink to="/">
             <ListItemIcon><InboxIcon/></ListItemIcon>
             <ListItemText primary="Due Today"/>
@@ -82,7 +72,7 @@ export default function App() {
         <Divider/>
 
         <List>
-          {userData.decks.map(deck => 
+          {UserService.getDecks().map(deck => 
             <ListItemLink key={deck.id} to={`/${deck.id}`}>
               <ListItemIcon><HorizontalSplitIcon/></ListItemIcon>
               <ListItemText primary={deck.name}/>
@@ -100,12 +90,13 @@ export default function App() {
         </List>
       </Drawer>
       <main>
-        <Toolbar/>
-        <Switch>
-          <Route exact path="/"><HomePage/></Route>
-          <Route exact path="/settings"><SettingsPage/></Route>
-          <Route path="/:deckId"><DeckPage/></Route>
-        </Switch>
+        <Container className={classes.container}>
+          <Switch>
+            <Route exact path="/"><HomePage/></Route>
+            <Route exact path="/settings"><SettingsPage/></Route>
+            <Route path="/:deckId"><DeckPage/></Route>
+          </Switch>
+        </Container>
       </main>
     </div>
   )

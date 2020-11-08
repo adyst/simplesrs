@@ -1,44 +1,57 @@
-import { User, Deck, Card } from './interfaces/app.interface';
+import { User, Deck, Card } from '../interfaces/app.interface';
 
-//TODO: create and api that gets the nested menu structure for decks
-//add parentId back to decks
 const cards: Card[] = [
   {
     id: 1,
-    front: "front text",
-    back: "back text",
-  }
-];
-
-const deckData: Deck[] = [
-  {
-    id: 1,
-    name: "German",
-    cards: cards
+    content: "front text",
+    lastReviewDate: new Date('December 16, 1995 03:24:00'),
+    nextReviewDate: new Date('December 17, 1995 03:24:00')
   },
   {
     id: 2,
-    name: "Cooking",
-    cards: cards
+    content: "# heading",
   },
   {
     id: 3,
-    name: "Ingredients",
-    cards: cards
-  },
-  {
-    id: 4,
-    name: "Vocabulary",
-    cards: cards
-  },
-  {
-    id: 5,
-    name: "Phrases",
-    cards: cards
+    content: "front --- back",
   }
 ];
 
+export const deckData = {
+  "1": {
+    id: 1,
+    ownerId: 1,
+    name: "German",
+    cards: cards
+  },
+  "2": {
+    id: 2,
+    ownerId: 2,
+    name: "Cooking",
+    cards: cards
+  },
+  "3": {
+    id: 3,
+    ownerId: 2,
+    name: "Ingredients",
+    cards: cards
+  },
+  "4": {
+    id: 4,
+    ownerId: 1,
+    name: "Vocabulary",
+    cards: cards
+  },
+  "5": {
+    id: 5,
+    ownerId: 1,
+    name: "Phrases",
+    cards: cards
+  }
+};
+
 export const userData: User = {
   id: 1,
-  decks: deckData
+  name: "Araceli",
+  deckIds: [1, 4, 5]
 };

@@ -24,7 +24,14 @@ class UserService {
     let deck = getDeck(deckId);
     deck.cards.push({id: 123, content: content});
 
-    return deck;
+    return deck.cards;
+  }
+
+  deleteCard(deckId: number, cardId: number): Card[] {
+    let deck = getDeck(deckId);
+    deck.cards = deck.cards.filter(card => card.id !== cardId);
+
+    return deck.cards;
   }
 }
 

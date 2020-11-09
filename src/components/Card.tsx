@@ -36,6 +36,11 @@ export default function Card(props) {
     setIsEditing(false);
   };
 
+  const handleOnDelete = () => {
+    props.onDelete(props.id);
+    setIsEditing(false);
+  }
+
   const handleOnClose = () => {
     setIsEditing(false);
   };
@@ -66,7 +71,7 @@ export default function Card(props) {
           </Typography>
         </CardActions>
       </MuiCard>
-      <EditCardDialog open={isEditing} onSave={handleOnSave} onClose={handleOnClose} defaultValue={props.content}/>
+      <EditCardDialog open={isEditing} onSave={handleOnSave} onDelete={handleOnDelete} onClose={handleOnClose} defaultValue={props.content}/>
     </React.Fragment>
   );
 }

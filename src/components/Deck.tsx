@@ -31,6 +31,10 @@ export default function Deck(props) {
     setIsAdding(false);
   };
 
+  const handleOnDelete = (id: number) => {
+    setCards(UserService.deleteCard(props.id, id));
+  }
+
   const handleOnClose = () => {
     setIsAdding(false);
   };
@@ -41,9 +45,9 @@ export default function Deck(props) {
         <IconButton onClick={handleOnAdd}><AddBoxIcon/></IconButton>
       </Toolbar>
       <Grid container spacing={3}>
-        {props.cards.map(card =>
+        {cards.map(card =>
           <Grid key={card.id} item xs={12} sm={12} md={6} lg={4}>
-            <Card {...card} onSave={handleOnSave} />
+            <Card {...card} onSave={handleOnSave} onDelete={handleOnDelete}/>
           </Grid>
         )}
       </Grid>

@@ -21,6 +21,7 @@ const useStyles = makeStyles({
 interface EditCardDialogProps {
   open: boolean,
   onSave(value: string): any,
+  onDelete?(): any,
   onClose(): any,
   defaultValue: string
 }
@@ -34,7 +35,6 @@ export default function EditCardDialog(props: EditCardDialogProps) {
   };
 
   const handleOnSave = () => {
-    console.log(value);
     props.onSave(value);
   };
 
@@ -48,6 +48,7 @@ export default function EditCardDialog(props: EditCardDialogProps) {
         <TextareaAutosize autoFocus defaultValue={props.defaultValue} onChange={handleOnChange} placeholder="Enter..." />
       </DialogContent>
       <DialogActions className={classes.dialogFooter}>
+        {props.onDelete ? <Button onClick={props.onDelete}>Delete</Button> : ""}
         <Button onClick={props.onClose}>Close</Button>
         <Button onClick={handleOnSave}>Save</Button>
       </DialogActions>

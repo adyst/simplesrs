@@ -46,6 +46,7 @@
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "typescript": "^4.0.5"
+    "typescript": "^4.0.5",
+    "use-react-router-breadcrumbs": "^1.0.5"
   }
 }

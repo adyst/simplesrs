@@ -4,7 +4,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FiberNewIcon from '@material-ui/icons/FiberNew';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import marked from 'marked';
-import EditCardDialog from './EditCardDialog';
+import CardEditDialog from './CardEditDialog';
+import { Card } from '../lib/interfaces/app.interface';
 
 //TODO: finesse the position of the context menu
 const useStyles = makeStyles({
@@ -23,7 +24,12 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Card(props) {
+interface CardProps extends Card {
+  onSave(id: number, content: string): any,
+  onDelete(id: number): any
+}
+
+export default function Card(props: CardProps) {
   const classes = useStyles();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -71,7 +77,7 @@ export default function Card(props) {
           </Typography>
         </CardActions>
       </MuiCard>
-      <EditCardDialog open={isEditing} onSave={handleOnSave} onDelete={handleOnDelete} onClose={handleOnClose} defaultValue={props.content}/>
+      <CardEditDialog open={isEditing} onSave={handleOnSave} onDelete={handleOnDelete} onClose={handleOnClose} defaultValue={props.content}/>
     </React.Fragment>
   );
 }

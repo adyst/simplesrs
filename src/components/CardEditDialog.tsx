@@ -26,7 +26,7 @@ interface EditCardDialogProps {
   defaultValue: string
 }
 
-export default function EditCardDialog(props: EditCardDialogProps) {
+export default function CardEditDialog(props: EditCardDialogProps) {
   const classes = useStyles();
   const [value, setValue] = useState(props.defaultValue);
   

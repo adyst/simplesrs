@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import Card from './Card';
 import UserService from '../lib/services/user.service';
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import EditCardDialog from './EditCardDialog';
+import CardEditDialog from './CardEditDialog';
+import { Deck } from '../lib/interfaces/app.interface';
 
 const useStyles = makeStyles({
   toolbar: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Deck(props) {
+export default function Deck(props: Deck) {
   const classes = useStyles();
   const [cards, setCards] = useState(props.cards);
   const [isAdding, setIsAdding] = useState(false);
@@ -51,7 +52,7 @@ export default function Deck(props) {
           </Grid>
         )}
       </Grid>
-      <EditCardDialog open={isAdding} onSave={handleOnSaveAdd} onClose={handleOnClose} defaultValue=""/>
+      <CardEditDialog open={isAdding} onSave={handleOnSaveAdd} onClose={handleOnClose} defaultValue=""/>
     </React.Fragment>
   );
 }

@@ -7,19 +7,24 @@ class UserService {
   }
 
   getDeck(id: number): Deck {
-    return deckData[id];
+    let deck: Deck = deckData[id];
+    if(!deck) throw new Error(`Unable to find deck with ID ${id}`);
+
+    return deck;
   }
 
-  saveCard(deckId: number, cardId: number, content: string) {
-    let deck: Deck = getDeck(deckId);
-    if(!deck) throw new Error(`Unable to find deck with ID ${deckId}`);
+  saveCard(deckId: number, cardId: number, content: string): Card[] {
+    return getDeck(deckId).cards.map(card => {
+      if(card.id === cardId) card.content = content;
+      return card;
+    });
+  }
 
-    let card: Card = deck.cards.find(card => card.id == cardId);
-    if(!card) throw new Error(`Unable to find card ID ${cardId} in deck ${deck.name}`);
+  addCard(deckId: number, content: string): Card[] {
+    let deck = getDeck(deckId);
+    deck.cards.push({id: 123, content: content});
 
-    console.log("saved card");
-
-    card.content = content;
+    return deck;
   }
 }
 

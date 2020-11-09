@@ -4,6 +4,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FiberNewIcon from '@material-ui/icons/FiberNew';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import marked from 'marked';
+import EditCardDialog from './EditCardDialog';
 
 //TODO: finesse the position of the context menu
 const useStyles = makeStyles({
@@ -19,37 +20,18 @@ const useStyles = makeStyles({
   wrapIcon: {
     verticalAlign: 'middle',
     display: 'inline-flex'
-  },
-  dialogContent: {
-    minHeight: '50px',
-    '& textarea': {
-      width: '100%',
-      border: 'none',
-      resize: 'none'
-    },
-    '& textarea:focus': {
-      outline: 'none'
-    }
-  },
-  dialogFooter: {
-    backgroundColor: '#0000001c'
   }
 });
 
 export default function Card(props) {
   const classes = useStyles();
   const [isEditing, setIsEditing] = useState(false);
-  const [content, setContent] = useState(props.content);
 
   const handleOnEdit = () => {
     setIsEditing(true);
   };
 
-  const handleOnChange = (e) => {
-    setContent(e.currentTarget.value);
-  };
-
-  const handleOnSave = (e) => {
+  const handleOnSave = (content: string) => {
     props.onSave(props.id, content);
     setIsEditing(false);
   };
@@ -84,20 +66,7 @@ export default function Card(props) {
           </Typography>
         </CardActions>
       </MuiCard>
-
-      <Dialog
-        fullWidth={true}
-        maxWidth='sm'
-        onClose={handleOnClose}
-        open={isEditing}>
-        <DialogContent className={classes.dialogContent}>
-          <TextareaAutosize autoFocus defaultValue={content} onChange={handleOnChange} placeholder="Enter..."/>
-        </DialogContent>
-        <DialogActions className={classes.dialogFooter}>
-          <Button>Close</Button>
-          <Button onClick={handleOnSave}>Save</Button>
-        </DialogActions>
-      </Dialog>
+      <EditCardDialog open={isEditing} onSave={handleOnSave} onClose={handleOnClose} defaultValue={props.content}/>
     </React.Fragment>
   );
 }

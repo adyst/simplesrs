@@ -7,9 +7,9 @@ export interface User {
 export interface Deck {
   id: number;
   name: string;
-  ownerId: number;
-  viewerIds?: number[];
-  childDecks?: Deck[];
+  users?: UserRole[];
+  parentId: number | null;
+  childrenIds?: number[];
   cards: Card[];
 }
 
@@ -20,5 +20,15 @@ export interface Card {
   nextReviewDate?: Date;
 }
 
+export interface UserRole {
+  userId: number;
+  role: Role;
+}
+
+export enum Role {
+  OWNER,
+  EDITOR,
+  VIEWER
+}
 
 

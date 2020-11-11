@@ -22,30 +22,45 @@ export const deckData = {
     id: 1,
     ownerId: 1,
     name: "German",
+    parentId: null,
+    childrenIds: [4, 5],
     cards: cards
   },
   "2": {
     id: 2,
-    ownerId: 2,
+    ownerId: 1,
     name: "Cooking",
+    parentId: null,
+    childrenIds: [3],
     cards: cards
   },
   "3": {
     id: 3,
-    ownerId: 2,
+    ownerId: 1,
     name: "Ingredients",
+    parentId: 2,
     cards: cards
   },
   "4": {
     id: 4,
     ownerId: 1,
     name: "Vocabulary",
+    parentId: 1,
+    childrenIds: [6],
     cards: cards
   },
   "5": {
     id: 5,
     ownerId: 1,
     name: "Phrases",
+    parentId: 1,
+    cards: cards
+  },
+  "6": {
+    id: 6,
+    ownerId: 1,
+    name: "Work",
+    parentId: 4,
     cards: cards
   }
 };
@@ -53,5 +68,5 @@ export const deckData = {
 export const userData: User = {
   id: 1,
   name: "Araceli",
-  deckIds: [1, 4, 5]
+  deckIds: [1, 2, 3, 4, 5]
 };

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Typography, Card as MuiCard, CardContent, CardHeader, CardActions, Button, IconButton, makeStyles, Dialog, DialogContent, DialogActions, TextareaAutosize } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import FiberNewIcon from '@material-ui/icons/FiberNew';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
+import EditIcon from '@material-ui/icons/Edit';
+import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import marked from 'marked';
 import CardEditDialog from './CardEditDialog';
 import { Card } from '../lib/interfaces/app.interface';
@@ -24,9 +25,10 @@ const useStyles = makeStyles({
   }
 });
 
-interface CardProps extends Card {
-  onSave(id: number, content: string): any,
-  onDelete(id: number): any
+interface CardProps {
+  card: Card;
+  onSave(card: Card): any;
+  onDelete(id: number): any;
 }
 
 export default function Card(props: CardProps) {
@@ -38,12 +40,15 @@ export default function Card(props: CardProps) {
   };
 
   const handleOnSave = (content: string) => {
-    props.onSave(props.id, content);
+    props.onSave({
+      ...props.card,
+      content: content
+    });
     setIsEditing(false);
   };
 
   const handleOnDelete = () => {
-    props.onDelete(props.id);
+    props.onDelete(props.card.id);
     setIsEditing(false);
   }
 
@@ -62,22 +67,22 @@ export default function Card(props: CardProps) {
           className={classes.cardHeader}
           action={
             <IconButton aria-label="settings" onClick={handleOnEdit}>
-              <MoreVertIcon />
+              <EditIcon fontSize="small"/>
             </IconButton>
           }
         />
         <CardContent>
-          <div dangerouslySetInnerHTML={renderText(props.content)}/>
+          <div dangerouslySetInnerHTML={renderText(props.card.content)}/>
         </CardContent>
         <CardActions>
           <Typography variant="caption" className={classes.wrapIcon}>
-            {props.lastReviewDate
+            {props.card.lastReviewDate
               ? <AutorenewIcon fontSize="small" />
-              : <FiberNewIcon fontSize="small" />}
+              : <NewReleasesIcon fontSize="small" />}
           </Typography>
         </CardActions>
       </MuiCard>
-      <CardEditDialog open={isEditing} onSave={handleOnSave} onDelete={handleOnDelete} onClose={handleOnClose} defaultValue={props.content}/>
+      <CardEditDialog open={isEditing} onSave={handleOnSave} onDelete={handleOnDelete} onClose={handleOnClose} defaultValue={props.card.content}/>
     </React.Fragment>
   );
 }

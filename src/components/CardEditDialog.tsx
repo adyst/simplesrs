@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, makeStyles, TextareaAutosize } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, IconButton, makeStyles, TextareaAutosize } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const useStyles = makeStyles({
   dialogContent: {
@@ -48,9 +51,9 @@ export default function CardEditDialog(props: EditCardDialogProps) {
         <TextareaAutosize autoFocus defaultValue={props.defaultValue} onChange={handleOnChange} placeholder="Enter..." />
       </DialogContent>
       <DialogActions className={classes.dialogFooter}>
-        {props.onDelete ? <Button onClick={props.onDelete}>Delete</Button> : ""}
-        <Button onClick={props.onClose}>Close</Button>
-        <Button onClick={handleOnSave}>Save</Button>
+        {props.onDelete ? <IconButton onClick={props.onDelete}><DeleteIcon/></IconButton> : ""}
+        <IconButton onClick={props.onClose}><CancelIcon/></IconButton>
+        <IconButton onClick={handleOnSave}><SaveIcon/></IconButton>
       </DialogActions>
     </Dialog>
   );

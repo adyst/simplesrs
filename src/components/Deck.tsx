@@ -19,8 +19,8 @@ export default function Deck(props: Deck) {
   const [cards, setCards] = useState(props.cards);
   const [isAdding, setIsAdding] = useState(false);
 
-  const handleOnSave = (cardId, content) => {
-    setCards(UserService.saveCard(props.id, cardId, content));
+  const handleOnSave = (card) => {
+    setCards(UserService.updateCard(card));
   };
 
   const handleOnAdd = () => {
@@ -48,7 +48,7 @@ export default function Deck(props: Deck) {
       <Grid container spacing={3}>
         {cards.map(card =>
           <Grid key={card.id} item xs={12} sm={12} md={6} lg={4}>
-            <Card {...card} onSave={handleOnSave} onDelete={handleOnDelete}/>
+            <Card card={card} onSave={handleOnSave} onDelete={handleOnDelete}/>
           </Grid>
         )}
       </Grid>

@@ -15,6 +15,7 @@ export interface Deck {
 
 export interface Card {
   id: number;
+  deckId: number;
   content: string;
   lastReviewDate?: Date;
   nextReviewDate?: Date;

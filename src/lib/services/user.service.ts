@@ -13,16 +13,16 @@ class UserService {
     return deck;
   }
 
-  saveCard(deckId: number, cardId: number, content: string): Card[] {
-    return getDeck(deckId).cards.map(card => {
-      if(card.id === cardId) card.content = content;
+  updateCard(newCard: Card): Card[] {
+    return getDeck(newCard.deckId).cards.map(card => {
+      if(card.id === newCard.id) return newCard;
       return card;
     });
   }
 
   addCard(deckId: number, content: string): Card[] {
     let deck = getDeck(deckId);
-    deck.cards.push({id: 123, content: content});
+    deck.cards.push({id: 123, deckId: deckId, content: content});
 
     return deck.cards;
   }

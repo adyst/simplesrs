@@ -6,7 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import marked from 'marked';
 import CardEditDialog from './CardEditDialog';
-import { Card } from '../lib/interfaces/app.interface';
+import { Card } from '../interfaces/app.interface';
 
 //TODO: finesse the position of the context menu
 const useStyles = makeStyles({

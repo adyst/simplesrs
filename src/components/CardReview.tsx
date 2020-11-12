@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Button, IconButton, LinearProgress } from '@material-ui/core';
-import { Card as ICard } from '../lib/interfaces/app.interface';
+import { Card as ICard } from '../interfaces/app.interface';
 import Card from './Card';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import UserService from '../lib/services/user.service';
+import UserService from '../api/user.service';
 
 interface CardReviewProps {
   cards: ICard[];

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import UserService from '../lib/services/user.service';
-import { Deck as IDeck } from '../lib/interfaces/app.interface';
+import UserService from '../api/user.service';
+import { Deck as IDeck } from '../interfaces/app.interface';
 import Deck from '../components/Deck';
 
 export default function DeckPage() {

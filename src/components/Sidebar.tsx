@@ -5,8 +5,8 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import SettingsIcon from '@material-ui/icons/Settings';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import UserService from '../lib/services/user.service';
-import { Deck } from '../lib/interfaces/app.interface';
+import UserService from '../api/user.service';
+import { Deck } from '../interfaces/app.interface';
 
 const drawerWidth = 240;
 

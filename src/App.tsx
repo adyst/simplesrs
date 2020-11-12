@@ -1,12 +1,12 @@
 import { Container, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import DeckPage from './DeckPage';
-import HomePage from './HomePage';
-import SettingsPage from './SettingsPage';
-import Sidebar from '../components/Sidebar';
-import Breadcrumb from '../components/Breadcrumb';
-import UserService from '../lib/services/user.service';
+import DeckPage from './pages/DeckPage';
+import HomePage from './pages/HomePage';
+import SettingsPage from './pages/SettingsPage';
+import Sidebar from './components/Sidebar';
+import Breadcrumb from './components/Breadcrumb';
+import UserService from './api/user.service';
 
 const useStyles = makeStyles({
   root: {

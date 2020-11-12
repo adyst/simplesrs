@@ -1,10 +1,10 @@
 import { Grid, makeStyles, Toolbar, IconButton } from '@material-ui/core';
 import React, { useState } from 'react';
 import Card from './Card';
-import UserService from '../lib/services/user.service';
+import UserService from '../api/user.service';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import CardEditDialog from './CardEditDialog';
-import { Deck } from '../lib/interfaces/app.interface';
+import { Deck } from '../interfaces/app.interface';
 
 const useStyles = makeStyles({
   toolbar: {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Deck } from '../lib/interfaces/app.interface';
-import UserService from '../lib/services/user.service';
+import { Card, Deck } from '../interfaces/app.interface';
+import UserService from '../api/user.service';
 import CardReview from '../components/CardReview';
 
 export default function HomePage() {

@@ -6,7 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import marked from 'marked';
 import CardEditDialog from './CardEditDialog';
-import { Card } from '../interfaces/app.interface';
+import { Card } from '../interfaces/deck.interface';
 
 //TODO: finesse the position of the context menu
 const useStyles = makeStyles({
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 });
 
 interface CardProps {
-  card: Card;
+  data: Card;
   onSave(card: Card): any;
   onDelete(id: number): any;
 }
@@ -41,14 +41,14 @@ export default function Card(props: CardProps) {
 
   const handleOnSave = (content: string) => {
     props.onSave({
-      ...props.card,
+      ...props.data,
       content: content
     });
     setIsEditing(false);
   };
 
   const handleOnDelete = () => {
-    props.onDelete(props.card.id);
+    props.onDelete(props.data.id);
     setIsEditing(false);
   }
 
@@ -61,7 +61,7 @@ export default function Card(props: CardProps) {
   const renderText = (text: string) => ({__html: marked(text)});
 
   return (
-    <React.Fragment>
+    <>
       <MuiCard className={classes.root}>
         <CardHeader
           className={classes.cardHeader}
@@ -72,17 +72,17 @@ export default function Card(props: CardProps) {
           }
         />
         <CardContent>
-          <div dangerouslySetInnerHTML={renderText(props.card.content)}/>
+          <div dangerouslySetInnerHTML={renderText(props.data.content)}/>
         </CardContent>
         <CardActions>
           <Typography variant="caption" className={classes.wrapIcon}>
-            {props.card.lastReviewDate
+            {props.data.lastReviewDate
               ? <AutorenewIcon fontSize="small" />
               : <NewReleasesIcon fontSize="small" />}
           </Typography>
         </CardActions>
       </MuiCard>
-      <CardEditDialog open={isEditing} onSave={handleOnSave} onDelete={handleOnDelete} onClose={handleOnClose} defaultValue={props.card.content}/>
-    </React.Fragment>
+      <CardEditDialog open={isEditing} onSave={handleOnSave} onDelete={handleOnDelete} onClose={handleOnClose} defaultValue={props.data.content}/>
+    </>
   );
 }

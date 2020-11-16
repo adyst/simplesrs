@@ -1,21 +1,19 @@
-import { User, Deck, Card } from '../interfaces/app.interface';
+import { Deck, Card } from '../interfaces/deck.interface';
+import { User } from '../interfaces/user.interface';
 
 const cards: Card[] = [
   {
     id: 1,
-    deckId: 1,
     content: "front text",
     lastReviewDate: new Date('December 16, 1995 03:24:00'),
     nextReviewDate: new Date('December 17, 1995 03:24:00')
   },
   {
     id: 2,
-    deckId: 1,
     content: "# heading",
   },
   {
     id: 3,
-    deckId: 1,
     content: "front --- back",
   }
 ];

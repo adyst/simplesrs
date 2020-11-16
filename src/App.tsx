@@ -1,8 +1,8 @@
 import { Container, makeStyles } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import DeckPage from './pages/DeckPage';
-import HomePage from './pages/HomePage';
+import ReviewPage from './pages/ReviewPage';
 import SettingsPage from './pages/SettingsPage';
 import Sidebar from './components/Sidebar';
 import Breadcrumb from './components/Breadcrumb';
@@ -34,7 +34,7 @@ export default function App() {
         <Container>
           <Breadcrumb routes={routes}/>
           <Switch>
-            <Route exact path="/"><HomePage/></Route>
+            <Route exact path="/"><ReviewPage/></Route>
             <Route exact path="/settings"><SettingsPage/></Route>
             <Route path="/:deckId"><DeckPage/></Route>
           </Switch>

@@ -1,5 +1,5 @@
 import { userData, deckData } from './data';
-import { Deck, Card } from '../interfaces/app.interface';
+import { Deck, Card } from '../interfaces/deck.interface';
 
 class UserService {
   getDecks(): Deck[] {
@@ -13,11 +13,9 @@ class UserService {
     return deck;
   }
 
-  updateCard(newCard: Card): Card[] {
-    return getDeck(newCard.deckId).cards.map(card => {
-      if(card.id === newCard.id) return newCard;
-      return card;
-    });
+  updateCard(deckId: number, newCard: Card){
+    let deck = getDeck(deckId);
+    deck.cards = deck.cards.map(card => card.id === newCard.id ? newCard : card);
   }
 
   addCard(deckId: number, content: string): Card[] {

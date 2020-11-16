@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Button, IconButton, LinearProgress } from '@material-ui/core';
-import { Card as ICard } from '../interfaces/app.interface';
-import Card from './Card';
+import { IconButton, LinearProgress } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import React, { useState } from 'react';
 import UserService from '../api/user.service';
+import { ReviewCard } from '../interfaces/deck.interface';
+import Card from './Card';
 
 interface CardReviewProps {
-  cards: ICard[];
+  cards: ReviewCard[];
 }
 
 export default function CardReview(props: CardReviewProps) {
@@ -23,20 +23,23 @@ export default function CardReview(props: CardReviewProps) {
 
   const onForget = () => {
     advanceProgress();
-    let newCard = {...props.cards[currentCardIndex], lastReviewDate: new Date(), nextReviewDate: new Date(Date.now() + 5)}
-    UserService.updateCard(newCard);
+    let reviewCard = props.cards[currentCardIndex];
+    let newCard = {...reviewCard.card, lastReviewDate: new Date(), nextReviewDate: new Date(Date.now() + 5)}
+    UserService.updateCard(reviewCard.deckId, newCard);
   };  
 
   const onRemember = () => {
     advanceProgress();
     //TODO: change date
   };
+  
+  const currentCard = props.cards[currentCardIndex].card;
 
   const reviewInProgress = () => {
     return(
       <>
         <LinearProgress variant="determinate" value={progress()}/>
-        <Card card={props.cards[currentCardIndex]} onSave={e => console.log("Save")} onDelete={e => console.log("Delete")}/>
+        <Card data={currentCard} onSave={e => console.log("Save")} onDelete={e => console.log("Delete")}/>
         <IconButton onClick={onRemember}><CheckIcon/></IconButton>
         <IconButton onClick={onForget}><ClearIcon/></IconButton>
       </>

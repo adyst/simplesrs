@@ -6,7 +6,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserService from '../api/user.service';
-import { Deck } from '../interfaces/app.interface';
+import { Deck } from '../interfaces/deck.interface';
 
 const drawerWidth = 240;
 
